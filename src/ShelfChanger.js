@@ -6,14 +6,11 @@ class ShelfChanger extends React.Component {
      }
      
      render() {
+      const Options = ["currentlyReading", "wantToRead", "read", "none"];
          return (
             <div className="book-shelf-changer">
-            <select onChange = {(e) => this.onShelfUpdate(this.props.book, e.target.value)}>
-              <option value="move" disabled>Move to...</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
+            <select onChange = {(e) => this.onShelfUpdate(this.props.book, e.target.value)}>  
+               {Options.map(text => <option value={text} selected={this.props.title === text}>{text}</option>)}
             </select>
           </div>
          )

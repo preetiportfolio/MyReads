@@ -28,7 +28,7 @@ getTitle = (title) => {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                       <li>
-                       <Book book={book} onShelfChangerUpdate={this.props.onShelfChangerUpdate}/> 
+                       <Book book={book} onShelfChangerUpdate={this.props.onShelfChangerUpdate} {...this.props}/> 
                       </li>
                     </ol>
                   </div>
