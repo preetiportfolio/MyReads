@@ -17,7 +17,7 @@ getTitle = (title) => {
   }
 }
      render() {
-         const {title} = this.props;
+         const {title, onShelfChangerUpdate} = this.props;
             
          return (
              <div>
@@ -28,7 +28,7 @@ getTitle = (title) => {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                       <li>
-                       <Book book={book} onShelfChangerUpdate={this.props.onShelfChangerUpdate} {...this.props}/> 
+                       <Book book={book} onShelfChangerUpdate={onShelfChangerUpdate}/> 
                       </li>
                     </ol>
                   </div>
