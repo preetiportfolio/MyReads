@@ -1,26 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import Book from './Book';
 
 class AddBook extends React.Component {
-    state = { term: ''};
+  state = {
+    term: '',
+    newBooks: []
+  };
 
-    onInputChange = (event) => {
-      this.setState({ term: event.target.value })
-    };
-    onFormSubmit = (event) => {
-        event.preventDefault();
-       
-        // TODO : MakeSure we call callback from Parent Component
-        this.props.onFormSubmit(this.state.term);
-    }
+  onInputChange = (event) => {
+    const query = event.target.value;
+    this.setState({ term: query });
 
-    render() {
-        return (
-            <div className="search-books">
-            <div className="search-books-bar">
-              <Link to ='/'><button className="close-search">Close</button></Link>
-              <div className="search-books-input-wrapper">
-                {/*
+    BooksAPI.search(query).then(books =>
+      this.setState({newBooks: books}));
+  };
+ 
+
+  render() {
+    const { book, onShelfChangerUpdate } = this.props;
+    return (
+      <div className="search-books">
+        <div className="search-books-bar">
+          <Link to='/'><button className="close-search">Close</button></Link>
+          <div className="search-books-input-wrapper">
+            {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
                   You can find these search terms here:
                   https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
@@ -28,21 +33,28 @@ class AddBook extends React.Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <form onSubmit={this.onFormSubmit}>
-                <input 
-                  type="text" 
-                  placeholder="Search by title or author" 
-                  value={this.state.term} 
-                  onChange={this.onInputChange}
-                />
-                </form>
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
+           
+              <input
+                type="text"
+                placeholder="Search by title or author"
+                value={this.state.term}
+                onChange={this.onInputChange}
+              />
+           
           </div>
-        );
-    }
+        </div>
+        <div className="search-books-results">
+          <ol className="books-grid">
+            {
+              this.state.newBooks.map(book =>
+                <li>
+                  <Book book={book} onShelfChangerUpdate={onShelfChangerUpdate} />
+                </li>)
+            }
+          </ol>
+        </div>
+      </div>
+    );
+  }
 }
 export default AddBook;

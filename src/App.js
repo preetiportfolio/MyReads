@@ -33,9 +33,6 @@ class BooksApp extends React.Component {
     });
   }
 
-  onTermSubmit = async term => {
-    const books = await BooksAPI.search(term);
-  };
 
   render = () => {
     const { myReads } = this.state;
@@ -43,7 +40,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route path='/AddBook' render={() => (
-          <AddBook onFormSubmit={this.onTermSubmit} />
+          <AddBook onShelfChangerUpdate={this.onShelfChangerUpdate} />
         )} />
 
         <Route exact path='/' render={() => (
