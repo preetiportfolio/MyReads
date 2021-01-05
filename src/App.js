@@ -20,7 +20,6 @@ componentDidMount() {
   BooksAPI.getAll().then(response => {
     this.setState({myReads: response});
   });
-  // Do not use state immediately after calling setState
 
 }
 
@@ -42,7 +41,6 @@ componentDidMount() {
 
   onTermSubmit = async term => {
     const books = await BooksAPI.search(term);
-    console.log(books);
   };
 
   render = () =>{
