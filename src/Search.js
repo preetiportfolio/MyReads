@@ -12,14 +12,20 @@ class Search extends React.Component {
   onInputChange = (event) => {
     const query = event.target.value;
     this.setState({ term: query });
-
-    BooksAPI.search(query).then(books =>
-      this.setState({newBooks: books}));
+    if (query) {
+      BooksAPI.search(query).then(books =>
+        this.setState({ newBooks: books }));
+    }
+    else {
+      this.setState({ newBooks: [] });
+    }
   };
- 
+
 
   render() {
     const { book, onShelfChangerUpdate } = this.props;
+    const { newBooks } = this.state;
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -33,25 +39,32 @@ class Search extends React.Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-           
-              <input
-                type="text"
-                placeholder="Search by title or author"
-                value={this.state.term}
-                onChange={this.onInputChange}
-              />
-           
+
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={this.state.term}
+              onChange={this.onInputChange}
+            />
+
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">
-            {
-              this.state.newBooks.map(book =>
-                <li>
-                  <Book book={book} onShelfChangerUpdate={onShelfChangerUpdate} />
-                </li>)
-            }
-          </ol>
+          {newBooks.length > 0 ? (
+            <ol className="books-grid">
+              {
+                newBooks.map(book =>
+                  <li>
+                    <Book book={book} onShelfChangerUpdate={onShelfChangerUpdate} />
+                  </li>)
+              }
+            </ol>
+          ) :
+            <h3>No Books Matching Search Found
+              <p> The search is limited to a particular set of search terms.
+                  You can find these search terms here:
+                  <a href="https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md" target ="_blank"> Possible Search Terms </a></p>
+              </h3>}
         </div>
       </div>
     );
