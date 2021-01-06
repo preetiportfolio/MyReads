@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 
-class AddBook extends React.Component {
+class Search extends React.Component {
   state = {
     term: '',
     newBooks: []
@@ -57,4 +57,4 @@ class AddBook extends React.Component {
     );
   }
 }
-export default AddBook;
+export default Search;

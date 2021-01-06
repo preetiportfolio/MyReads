@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import AddBook from './AddBook';
+import Search from './Search';
 import BookShelf from './BookShelf';
 
 class BooksApp extends React.Component {
@@ -39,8 +39,8 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        <Route path='/AddBook' render={() => (
-          <AddBook onShelfChangerUpdate={this.onShelfChangerUpdate} />
+        <Route path='/Search' render={() => (
+          <Search onShelfChangerUpdate={this.onShelfChangerUpdate} />
         )} />
 
         <Route exact path='/' render={() => (
@@ -52,7 +52,7 @@ class BooksApp extends React.Component {
             <BookShelf title="wantToRead" myReads={myReads} onShelfChangerUpdate={this.onShelfChangerUpdate} />
             <BookShelf title="read" myReads={myReads} onShelfChangerUpdate={this.onShelfChangerUpdate} />
             <div className="open-search">
-              <Link to='/AddBook'><button>Add a book</button></Link>
+              <Link to='/Search'><button>Add a book</button></Link>
             </div>
           </div>
         )} />
