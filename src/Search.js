@@ -24,7 +24,7 @@ class Search extends React.Component {
 
   render() {
     const { book, onShelfChangerUpdate } = this.props;
-    const { newBooks } = this.state;
+    const { term, newBooks } = this.state;
 
     return (
       <div className="search-books">
@@ -43,7 +43,7 @@ class Search extends React.Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              value={this.state.term}
+              value={term}
               onChange={this.onInputChange}
             />
 
