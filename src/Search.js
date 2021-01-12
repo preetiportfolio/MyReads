@@ -55,16 +55,18 @@ class Search extends React.Component {
               {
                 newBooks.map(book =>
                   <li>
-                    <Book book={book} shelfChanger={shelfChanger} books={books}/>
+                    <Book book={book} books={books} shelfChanger={shelfChanger}/>
                   </li>)
               }
             </ol>
           ) :
+            <div className="search-books-noResults">
             <h3>No Books Matching Search Found
               <p> The search is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  <a href="https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md" target ="_blank"> Possible Search Terms </a></p>
-              </h3>}
+                  You can find these search terms here  :     
+                  <a href="https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md" target ="_blank">  Possible Search Terms </a></p>
+              </h3>
+              </div>}
         </div>
       </div>
     );
