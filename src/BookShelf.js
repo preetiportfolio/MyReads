@@ -1,42 +1,24 @@
 import React from 'react';
 import Book from './Book';
 
-class BookShelf extends React.Component { 
-    
-getTitle = (title) => {
-  switch(title) {
-    case "currentlyReading":
-      return "Currently Reading";
-    case "wantToRead":
-      return "Want To Read";
-    case "read":
-      return "Read";
-    default:
-      return "";      
-      
+class BookShelf extends React.Component {
+
+  render() {
+    const { books, shelfChanger } = this.props;
+
+    return (
+      <ol className="books-grid">
+        {books.map(book => (
+          <Book
+            book={book}
+            books={books}
+            key={book.id}
+            shelfChanger={shelfChanger}
+          />
+        ))}
+      </ol>
+    );
   }
-}
-     render() {
-         const {title, onShelfChangerUpdate} = this.props;
-            
-         return (
-             <div>
-            <h2 className="bookshelf-title">{this.getTitle(title)}</h2>
-            {
-             this.props.myReads.filter(book => book.shelf === title).map(book => 
-                <div className="bookshelf">
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <li>
-                       <Book book={book} onShelfChangerUpdate={onShelfChangerUpdate}/> 
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-           )}
-         </div>
-         )
-     }
 
 
 }

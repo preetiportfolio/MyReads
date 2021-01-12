@@ -23,7 +23,7 @@ class Search extends React.Component {
 
 
   render() {
-    const { book, onShelfChangerUpdate } = this.props;
+    const { books, shelfChanger } = this.props;
     const { term, newBooks } = this.state;
 
     return (
@@ -55,7 +55,7 @@ class Search extends React.Component {
               {
                 newBooks.map(book =>
                   <li>
-                    <Book book={book} onShelfChangerUpdate={onShelfChangerUpdate} />
+                    <Book book={book} shelfChanger={shelfChanger} books={books}/>
                   </li>)
               }
             </ol>

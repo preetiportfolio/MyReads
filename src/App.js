@@ -3,28 +3,28 @@ import { Route, Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Search from './Search';
-import BookShelf from './BookShelf';
+import BookList from './BookList';
 
 class BooksApp extends React.Component {
   state = {  
-    myReads: []
+    books: []
   }
   componentDidMount() {
 
     BooksAPI.getAll().then(response => {
-      this.setState({ myReads: response });
+      this.setState({ books: response });
     });
 
   }
 
-  onShelfChangerUpdate = (book, shelf) => {
+  shelfChanger = (book, shelf) => {
 
     BooksAPI.update(book, shelf).then(response => {
       // set shelf for new or updated book
       book.shelf = shelf;
       // update state with changed book
       this.setState(prevState => ({
-        myReads: prevState.myReads
+        books: prevState.books
           // remove updated book from array
           .filter(bk => bk.id !== book.id)
           // add updated book to array
@@ -35,12 +35,12 @@ class BooksApp extends React.Component {
 
 
   render = () => {
-    const { myReads } = this.state;
+    const { books } = this.state;
 
     return (
       <div className="app">
         <Route path='/Search' render={() => (
-          <Search onShelfChangerUpdate={this.onShelfChangerUpdate} />
+          <Search books={books} shelfChanger={this.shelfChanger} />
         )} />
 
         <Route exact path='/' render={() => (
@@ -48,9 +48,7 @@ class BooksApp extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            <BookShelf title="currentlyReading" myReads={myReads} onShelfChangerUpdate={this.onShelfChangerUpdate} />
-            <BookShelf title="wantToRead" myReads={myReads} onShelfChangerUpdate={this.onShelfChangerUpdate} />
-            <BookShelf title="read" myReads={myReads} onShelfChangerUpdate={this.onShelfChangerUpdate} />
+            <BookList books={books} shelfChanger={this.shelfChanger} />
             <div className="open-search">
               <Link to='/Search'><button>Add a book</button></Link>
             </div>
