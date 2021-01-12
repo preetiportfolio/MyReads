@@ -54,9 +54,8 @@ class Search extends React.Component {
             <ol className="books-grid">
               {
                 newBooks.map(book =>
-                  <li>
-                    <Book book={book} books={books} shelfChanger={shelfChanger}/>
-                  </li>)
+                    <Book key={book.id} book={book} books={books} shelfChanger={shelfChanger}/>
+                  )
               }
             </ol>
           ) :
@@ -64,7 +63,7 @@ class Search extends React.Component {
             <h3>No Books Matching Search Found
               <p> The search is limited to a particular set of search terms.
                   You can find these search terms here  :     
-                  <a href="https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md" target ="_blank">  Possible Search Terms </a></p>
+                  <a href="https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md" target ="_blank" rel="noopener noreferrer">  Possible Search Terms </a></p>
               </h3>
               </div>}
         </div>
