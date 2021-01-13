@@ -19,7 +19,7 @@ class ShelfChanger extends React.Component {
         return (
             <div className="book-shelf-changer">
                 <select onChange = {(e) => this.onShelfUpdate(book, e.target.value)} value={currentShelf}>
-                    <option value="none" disabled>
+                    <option value="" disabled>
                         Move to... </option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead" >Want to Read</option>

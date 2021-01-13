@@ -6,15 +6,12 @@ import Search from './Search';
 import BookList from './BookList';
 
 class BooksApp extends React.Component {
-  state = {  
+  state = {
     books: []
   }
-  componentDidMount() {
-
-    BooksAPI.getAll().then(response => {
-      this.setState({ books: response });
-    });
-
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();
+    this.setState({ books });
   }
 
   shelfChanger = (book, shelf) => {
@@ -39,11 +36,11 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        <Route path='/Search' render={() => (
+        <Route path='/Search'>
           <Search books={books} shelfChanger={this.shelfChanger} />
-        )} />
+       </Route>
 
-        <Route exact path='/' render={() => (
+        <Route exact path='/'> 
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -53,7 +50,7 @@ class BooksApp extends React.Component {
               <Link to='/Search'><button>Add a book</button></Link>
             </div>
           </div>
-        )} />
+        </Route>
       </div>
     )
   }

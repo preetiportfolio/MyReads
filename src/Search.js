@@ -29,7 +29,7 @@ class Search extends React.Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to='/'><button className="close-search">Close</button></Link>
+          <Link className="close-search" to='/'>Close</Link>
           <div className="search-books-input-wrapper">
             {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -54,8 +54,7 @@ class Search extends React.Component {
             <ol className="books-grid">
               {
                 newBooks.map(book =>
-                    <Book key={book.id} book={book} books={books} shelfChanger={shelfChanger}/>
-                  )
+                    <Book key={book.id} book={book} books={books} shelfChanger={shelfChanger}/>)
               }
             </ol>
           ) :
